@@ -1,0 +1,85 @@
+﻿@model RetailBankManagement.Models.Customer
+
+@{
+    ViewBag.Title = "ViewCustomerteller";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("Loginforteller", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerforTeller", "Customer")">View customer details</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountByCustomerId", "AccountSearch")">View account details</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountByCustomerId", "AccountSearch")">Transactions</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountStatement", "AccountSearch")">Account statement</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+    }
+<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+<h2 class="header">Customer details</h2>
+
+<div class="form_div">
+    @{
+        for (int i = 0; i < Model.storeData.Tables[0].Rows.Count; i++)
+        {
+            var CustomerId = Model.storeData.Tables[0].Rows[i]["Customer_ID"].ToString();
+            var CustomerssnID = Model.storeData.Tables[0].Rows[i]["Customer_SSN_ID"].ToString();
+            var CustomerName = Model.storeData.Tables[0].Rows[i]["Customer_Name"].ToString();
+            var CustomerAge = Model.storeData.Tables[0].Rows[i]["Customer_Age"].ToString();
+            var CustomerAddress = Model.storeData.Tables[0].Rows[i]["Customer_Address"].ToString();
+            <table class="tbl" cellspacing="5px" cellpadding="5px">
+                <tr>
+                    <td>
+                        <b>Customer ID</b>
+                    </td>
+                    <td>
+                        <b>Customer SSNID</b>
+                    </td>
+                    <td>
+                        <b>Customer Name</b>
+                    </td>
+                    <td>
+                        <b>Customer Age</b>
+                    </td>
+                    <td>
+                        <b>Customer Address</b>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td>
+                        @CustomerId
+                    </td>
+                    <td>
+                        @CustomerssnID
+                    </td>
+                    <td>
+                        @CustomerName
+                    </td>
+                    <td>
+                        @CustomerAge
+                    </td>
+                    <td>
+                        @CustomerAddress
+                    </td>
+
+                </tr>
+            </table>
+        }
+        @Html.ActionLink("Download word file", "DownloadWordCustomerDetails");
+    }
+   
+</div>
+
+

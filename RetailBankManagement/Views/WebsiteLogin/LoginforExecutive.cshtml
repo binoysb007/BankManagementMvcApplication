@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "LoginforExecutive";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("LoginforExecutive", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddCustomer", "Customer")">Add customer</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerByCustomerId", "Customer")">Update/Delete customer</a> </td>
+        </tr>
+        <tr>
+            <td> <a href="@Url.Action("ViewAllCustomer", "Customer")">View all customer</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("InsertCustomer", "CreateCustomerAccounts2por")">Create account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountsearchforExecutive", "AccountSearch")">Delete account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewAllAccount", "AccountSearch")">View all account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+
+}
+<div class="form_div">
+    <h2 style="text-align:center">Welcome Executive</h2>
+
+    <img src="~/Images/BlankProfile.jpg" />
+</div>

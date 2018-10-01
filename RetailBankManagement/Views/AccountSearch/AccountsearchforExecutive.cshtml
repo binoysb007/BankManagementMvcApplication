@@ -1,0 +1,98 @@
+﻿@model RetailBankManagement.Models.AccountSearch
+
+@{
+    ViewBag.Title = "AccountsearchforExecutive";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("LoginforExecutive", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddCustomer", "Customer")">Add customer</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerByCustomerId", "Customer")">Update/Delete customer</a> </td>
+        </tr>
+        <tr>
+            <td> <a href="@Url.Action("ViewAllCustomer", "Customer")">View all customer</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("InsertCustomer", "CreateCustomerAccounts2por")">Create account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountsearchforExecutive", "AccountSearch")">Delete account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewAllAccount", "AccountSearch")">View all account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+
+}
+@{
+
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+<script type="text/javascript">
+    var message = '@message';
+    if (message)
+        alert(message);
+</script>
+<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<h2 class="header">Account search</h2>
+
+
+@using (Html.BeginForm())
+{
+    <div class="form_div">
+        <table class="tbl" cellspacing="5px" cellpadding="5px">
+            <tr>
+                @{
+    List<SelectListItem> items = new List<SelectListItem>();
+    items.Add(new SelectListItem { Text = "Select Mode", Value = "", Selected = true });
+    items.Add(new SelectListItem { Text = "ByCustomerID", Value = "ByCustomerID" });
+    items.Add(new SelectListItem { Text = "ByAccountID", Value = "ByAccountID" });
+                }
+
+                <td>
+                    @Html.LabelFor(a => a.Account_Search)
+                </td>
+                <td>
+                    @Html.DropDownListFor(a => a.Account_Search, items, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.Account_Search, "", new { @style = "color: red" })
+                </td>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Customer_Id)
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(a => a.Customer_Id)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.Customer_Id, "", new { @style = "color: red" })
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="submitAccSearch" type="submit" value="Search" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+}
+
+
+
+

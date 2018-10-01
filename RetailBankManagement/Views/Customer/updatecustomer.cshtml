@@ -1,0 +1,171 @@
+﻿@model RetailBankManagement.Models.Customer
+
+@{
+    ViewBag.Title = "updatecustomer";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("LoginforExecutive", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddCustomer", "Customer")">Add customer</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerByCustomerId", "Customer")">Update/Delete customer</a> </td>
+        </tr>
+        <tr>
+            <td> <a href="@Url.Action("ViewAllCustomer", "Customer")">View all customer</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("InsertCustomer", "CreateCustomerAccounts2por")">Create account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountsearchforExecutive", "AccountSearch")">Delete account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewAllAccount", "AccountSearch")">View all account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+
+}
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+<h2 class="header">Update customer</h2>
+<div class="form_div">
+    @using (Html.BeginForm())
+    {
+        <table class="tbl" cellspacing="5px" cellpadding="5px">
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Customer_Id)
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(a => a.Customer_Id, new { @readonly = "readonly" })
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Customer_ssn_Id)
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(a => a.Customer_ssn_Id, new { @readonly = "readonly" })
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Customer_Name)
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(a => a.Customer_Name)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.Customer_Name, "", new { @style = "color: red" })
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Customer_Age)
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(a => a.Customer_Age)
+                </td>
+                <td>
+
+                    @Html.ValidationMessageFor(a => a.Customer_Age, "", new { @style = "color: red" })
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Customer_Address)
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(a => a.Customer_Address)
+                </td>
+                <td>
+
+                    @Html.ValidationMessageFor(a => a.Customer_Address, "", new { @style = "color: red" })
+
+                </td>
+            </tr>
+            <tr>
+                @{
+        List<SelectListItem> state = new List<SelectListItem>();
+        state.Add(new SelectListItem { Text = "Select State", Value = "", Selected = true });
+        state.Add(new SelectListItem { Text = "Odisha", Value = "Odisha" });
+        state.Add(new SelectListItem { Text = "Madhya Pradesh", Value = "MadhyaPradesh" });
+        state.Add(new SelectListItem { Text = "Maharashtra", Value = "Maharashtra" });
+        state.Add(new SelectListItem { Text = "Uttar Pradesh", Value = "UttarPradesh" });
+        state.Add(new SelectListItem { Text = "West Bengal", Value = "WestBengal" });
+                }
+                <td>
+                    @Html.LabelFor(a => a.Customer_State)
+                </td>
+                <td>
+                    @Html.DropDownListFor(a => a.Customer_State, state, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a=> a.Customer_State, "", new { @style = "color: red" })
+
+                </td>
+            </tr>
+            <tr>
+                @{
+        List<SelectListItem> cities = new List<SelectListItem>();
+        cities.Add(new SelectListItem { Text = "Select City", Value = "", Selected = true });
+        cities.Add(new SelectListItem { Text = "Bhubaneswar", Value = "Bhubaneswar" });
+        cities.Add(new SelectListItem { Text = "Kolkata", Value = "Kolkata" });
+        cities.Add(new SelectListItem { Text = "Mumbai", Value = "Mumbai" });
+        cities.Add(new SelectListItem { Text = "Lucknow", Value = "Lucknow" });
+        cities.Add(new SelectListItem { Text = "Guwalior", Value = "Guwalior" });
+
+                }
+                <td>
+                    @Html.LabelFor(a => a.Customer_City)
+                </td>
+                <td>
+                    @Html.DropDownListFor(a => a.Customer_City, cities, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.Customer_City, "", new { @style = "color: red" })
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="Submit1" onclick="return confirm('Are you sure you want update ?');" type="submit" value="Update" />
+                    @Html.ActionLink("Cancel", "ViewCustomerByCustomerId")
+                </td>
+                <td style="color:white;"></td>
+            </tr>
+        </table>
+    }
+
+</div>
+@{
+    if (ViewData["resultupdate"] != "" && ViewData["resultupdate"] != null)
+    {
+        ViewData["resultUpdate"] = null;
+        <script type="text/javascript" language="javascript">
+            alert("Customer update successfully");
+            Response.Redirect("ViewCustomerByCustomerId");
+        </script>
+       
+    }
+}
+

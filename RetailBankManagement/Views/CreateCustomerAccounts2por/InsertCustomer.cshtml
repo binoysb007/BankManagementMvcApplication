@@ -1,0 +1,135 @@
+﻿@model RetailBankManagement.Models.CreateCustomerAccounts2por
+
+@{
+    ViewBag.Title = "InsertCustomer";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("LoginforExecutive", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddCustomer", "Customer")">Add customer</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerByCustomerId", "Customer")">Update/Delete customer</a> </td>
+        </tr>
+        <tr>
+            <td> <a href="@Url.Action("ViewAllCustomer", "Customer")">View all customer</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("InsertCustomer", "CreateCustomerAccounts2por")">Create account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountsearchforExecutive", "AccountSearch")">Delete account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewAllAccount", "AccountSearch")">View all account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+
+}
+<h2 class="header">Create account</h2>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+<div class="form_div">
+    @using (Html.BeginForm())
+    {
+        <table class="tbl" cellspacing="5px" cellpadding="5px">
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.CustomerID)
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.CustomerID)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.CustomerID, "", new { @style = "color: red" })
+                </td>
+            </tr>
+
+            <tr>
+                @{
+        List<SelectListItem> listItems = new List<SelectListItem>();
+        listItems.Add(new SelectListItem { Text = "Select", Value = "", Selected = true });
+        listItems.Add(new SelectListItem { Text = "Saving", Value = "Saving", });
+        listItems.Add(new SelectListItem { Text = "Current", Value = "Current" });
+                }
+                <td>
+                    @Html.LabelFor(a => a.AccountType)
+                </td>
+                <td>
+                    @Html.DropDownListFor(a => a.AccountType, listItems, new { @class = "form-control", })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.AccountType, "", new { @style = "color: red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.DepositAmount)
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.DepositAmount)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.DepositAmount, "", new { @style = "color: red" })
+                </td>
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <input id="Submit1" type="Submit" value="submit" />
+                    <input type="reset" value="Reset" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>
+
+@{
+
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+<script type="text/javascript">
+    var message = '@message';
+    if (message)
+        alert(message);
+</script>
+
+
+
+@{
+    if (Convert.ToInt32(ViewData["Result"]) != 0)
+    {
+
+        if (Convert.ToInt32(ViewData["Result"]) != 1)
+        {
+            int i = Convert.ToInt32(ViewData["Result"]);
+            ViewData["Result"] = null;
+            <script type="text/javascript">
+                var message = '@message';
+                if (message)
+                    alert(message);
+            </script>
+        }
+        else if (Convert.ToInt32(ViewData["Result"]) == 1)
+        {
+            ViewData["Result"] = null;
+            <script type="text/javascript" language="javascript">
+                alert('Account already exist with same customer ID');
+            </script>
+        
+         }  
+      }
+        
+    
+}

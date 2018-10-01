@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "aftertransfer";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("Loginforteller", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerforTeller", "Customer")">View customer details</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountByCustomerId", "AccountSearch")">View account details</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountByCustomerId", "AccountSearch")">Transactions</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountStatement", "AccountSearch")">Account statement</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+    }
+
+<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+
+@{
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var message = '@message';
+    if(message)
+        alert(message);
+</script>
+<h2 class="header">Transfer details</h2>
+<html>
+
+<body>
+    <div class="form_div">
+        @using (Html.BeginForm())
+        {
+            <table  class="tbl" cellspacing="5px" cellpadding="5px">
+                <tr>
+                    <th>  </th>
+                    <th>Source Account</th>
+                    <th>Target Account</th>
+
+
+                </tr>
+                <tr>
+                    <td>Acccount Number</td>
+                    <td align="center">@ViewBag.acc1</td>
+                    <td align="center">@ViewBag.acc2</td>
+                </tr>
+                <tr>
+                    <td>Balance Before Transfer(in Rupees)</td>
+                    <td align="center">@ViewBag.balbefupdateacc1 </td>
+                    <td align="center">@ViewBag.balbefupdateacc2</td>
+
+
+                </tr>
+                <tr>
+                    <td>Balance After Transfer(in Rupees)</td>
+
+                    <td align="center">@ViewBag.balaftupdateacc1</td>
+                    <td align="center">@ViewBag.balaftupdateacc2</td>
+                </tr>
+                <tr>
+                    <td align="center">  Amount Transferred= @ViewBag.amount rupees</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ActionLink("Back to search", "AccountByCustomerId")
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</body>
+</html>

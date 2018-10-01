@@ -1,0 +1,70 @@
+﻿@model IEnumerable< RetailBankManagement.Models.AccountSearch>
+
+@{
+    ViewBag.Title = "viewAccountStatement";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("Loginforteller", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerforTeller", "Customer")">View customer details</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountByCustomerId", "AccountSearch")">View account details</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountByCustomerId", "AccountSearch")">Transactions</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountStatement", "AccountSearch")">Account statement</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+    }
+<style type="text/css">
+    .table {
+        border-collapse: collapse;
+        width: 700px;
+        margin: 0px auto;
+    }
+
+    .header1 {
+        background-color: gray;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .table th, .table td {
+        border: 1px solid black;
+        padding: 5px;
+        text-align: center;
+    }
+</style>
+
+
+
+<h2 class="header">View account statement</h2>
+<div class="form_div">
+@{
+    var grid = new WebGrid(source: Model);
+    @grid.GetHtml(
+            tableStyle: "table",
+            headerStyle: "header1",
+            footerStyle: "grid-footer", 
+            htmlAttributes: new { id = "DataTable" }, columns: grid.Columns(
+                        grid.Column("TransactionID","Transaction ID"),
+                grid.Column("TransactionDescription","Description"),
+                grid.Column("TransactionDate","Date(mm-dd-yyyy)"),
+                grid.Column("TransactionAmount","Amount(INR)")
+        
+          
+        ));
+    @Html.ActionLink("Download Excel Sheet", "DownloadExcelAccountStatement");
+}
+
+</div>

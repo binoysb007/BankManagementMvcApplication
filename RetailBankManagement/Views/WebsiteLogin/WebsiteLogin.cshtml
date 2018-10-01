@@ -1,0 +1,62 @@
+﻿@model RetailBankManagement.Models.WebsiteLoginModels
+
+@{
+    ViewBag.Title = "WebsiteLogin";
+}
+
+@section k
+{}
+
+@{
+
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+<script type="text/javascript">
+    var message = '@message';
+    if (message)
+        alert(message);
+</script>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+<div class="form_div">
+    <h2 class="header">Login</h2>
+    @using (Html.BeginForm())
+    {
+        <table class="tbl" cellspacing="5px" cellpadding="5px">
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.User_ID)
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.User_ID)
+                    @Html.ValidationMessageFor(a => a.User_ID, "", new { @style = "color: red" })
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Password)
+                </td>
+                <td>
+                    @Html.PasswordFor(a => a.Password)
+                    @Html.ValidationMessageFor(a => a.Password, "", new { @style = "color: red" })
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input id="Submit1" type="submit" value="Login"/>
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td style="color:red">
+                    @ViewBag.error
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    }
+</div>

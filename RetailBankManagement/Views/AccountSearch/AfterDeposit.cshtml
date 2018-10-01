@@ -1,0 +1,71 @@
+﻿@model RetailBankManagement.Models.AccountSearch
+
+@{
+    ViewBag.Title = "AfterDeposit";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("Loginforteller", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerforTeller", "Customer")">View customer details</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountByCustomerId", "AccountSearch")">View account details</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountByCustomerId", "AccountSearch")">Transactions</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountStatement", "AccountSearch")">Account statement</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+    }
+@{
+
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+
+<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+<script type="text/javascript">
+    var message = '@message';
+    if (message)
+        alert(message);
+</script>
+
+<h2 class="header">Deposit Details</h2>
+<body>
+    <div class="form_div">
+        @using (Html.BeginForm())
+        {
+            <table class="tbl" cellspacing="5px" cellpadding="5px">
+                <tr>
+                    <td>Account ID</td>
+                    <td>@Html.ViewBag.accid </td>
+                </tr>
+                <tr>
+                    <td>Balance Before Deposit</td>
+                    <td>@Html.ViewBag.BalBeforwith Rs.</td>
+                </tr>
+                <tr>
+                    <td>Latest Balance</td>
+                    <td>@Html.ViewBag.latbalance Rs.</td>
+                </tr>
+                <tr>
+                    <td>
+                        @Html.ActionLink("Back to search", "AccountByCustomerId")
+                    </td>
+                </tr>
+            </table>
+
+
+
+        }
+    </div>
+</body>
+

@@ -1,0 +1,101 @@
+﻿@model RetailBankManagement.Models.AccountSearch
+
+@{
+    ViewBag.Title = "Deposit";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("Loginforteller", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerforTeller", "Customer")">View customer details</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountByCustomerId", "AccountSearch")">View account details</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountByCustomerId", "AccountSearch")">Transactions</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountStatement", "AccountSearch")">Account statement</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+    }
+@{
+
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+
+<script type="text/javascript">
+    var message = '@message';
+    if (message)
+        alert(message);
+</script>
+<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+<h2 class="header">Deposit</h2>
+<body>
+    <div class="form_div">
+        @using (Html.BeginForm())
+        {
+
+            <table class="tbl" cellspacing="5px" cellpadding="5px">
+                <tr>
+                    <td></td>
+                    <td>
+                        @Html.HiddenFor(a => a.AccountID)
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Account ID</b> </td>
+                    <td>
+
+                        @Html.DisplayFor(a => a.AccountID)
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Customer ID </b></td>
+                    <td>
+                        @Html.DisplayFor(a => a.CustomerID)
+                        @Html.HiddenFor(a => a.CustomerID)
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Account type</b> </td>
+                    <td>
+
+                        @Html.DisplayFor(a => a.AccountType)
+                        @Html.HiddenFor(a => a.AccountType)
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Balance amount(INR) </b></td>
+                    <td>
+                        @Html.DisplayFor(a => a.BalanceAmount)
+                        @Html.HiddenFor(a => a.BalanceAmount)
+                    </td>
+                </tr>
+                <tr>
+                    <td><b>Deposit amount(INR)</b> </td>
+                    <td>
+                        @Html.TextBoxFor(a => a.DepositAmount)
+                        @Html.HiddenFor(a => a.DepositAmount)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align:center">
+                        <input id="Submit" onclick="return confirm('Are you sure you want deposit ?');" type="submit" value="Deposit" />
+                        @Html.ActionLink("Cancel", "AccountByCustomerId")
+                    </td>
+
+                </tr>
+            </table>
+
+        }
+    </div>
+</body>
+

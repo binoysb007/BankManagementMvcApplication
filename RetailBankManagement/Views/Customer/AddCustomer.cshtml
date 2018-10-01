@@ -1,0 +1,190 @@
+﻿@model RetailBankManagement.Models.Customer
+
+@{
+    ViewBag.Title = "AddCustomer";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+    <tr>
+        <td><a href="@Url.Action("LoginforExecutive", "WebsiteLogin")">Home</a></td>
+    </tr>
+    <tr>
+        <td><a href="@Url.Action("AddCustomer", "Customer")">Add customer</a> </td>
+    </tr>
+    <tr>
+        <td><a href="@Url.Action("ViewCustomerByCustomerId", "Customer")">Update/Delete customer</a> </td>
+    </tr>
+    <tr>
+        <td> <a href="@Url.Action("ViewAllCustomer", "Customer")">View all customer</a></td>
+    </tr>
+        <tr>
+            <td><a href="@Url.Action("InsertCustomer", "CreateCustomerAccounts2por")">Create account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountsearchforExecutive", "AccountSearch")">Delete account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewAllAccount", "AccountSearch")">View all account</a></td>
+        </tr>
+    <tr>
+        <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+    </tr>
+
+</table>
+
+    }
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+<h2 class="header">Add customer details</h2>
+<div class="form_div">
+    @using (Html.BeginForm())
+    {
+
+        <table class="tbl" cellspacing="5px" cellpadding="5px">
+            <tr>
+                <td>
+                    @Html.LabelFor(b => b.Customer_ssn_Id)
+                </td>
+                <td>
+                    @Html.TextBoxFor(b => b.Customer_ssn_Id)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(b => b.Customer_ssn_Id, "", new { @style = "color: red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(b => b.Customer_Name)
+                </td>
+                <td>
+                    @Html.TextBoxFor(b => b.Customer_Name)
+                  
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(b => b.Customer_Name, "", new { @style = "color: red" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(b => b.DOB)
+                </td>
+                <td>
+                    @Html.TextBoxFor(b => b.DOB, new { Type = "date" })
+
+                </td>
+              
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(b => b.Customer_Age)
+                </td>
+                <td>
+                    @Html.TextBoxFor(b => b.Customer_Age)
+                
+                </td>
+                <td>
+
+                    @Html.ValidationMessageFor(b => b.Customer_Age, "", new { @style = "color: red" })
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    @Html.LabelFor(b => b.Customer_Address)
+                </td>
+                <td>
+                    @Html.TextBoxFor(b => b.Customer_Address)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(b => b.Customer_Address, "", new { @style = "color: red" })
+                </td>
+            </tr>
+            <tr>
+                @{
+        List<SelectListItem> items = new List<SelectListItem>();
+        items.Add(new SelectListItem { Text = "Select State", Value = "", Selected = true });
+        items.Add(new SelectListItem { Text = "Odisha", Value = "Odisha" });
+        items.Add(new SelectListItem { Text = "Madhya Pradesh", Value = "MadhyaPradesh" });
+        items.Add(new SelectListItem { Text = "Maharashtra", Value = "Maharashtra" });
+        items.Add(new SelectListItem { Text = "Uttar Pradesh", Value = "UttarPradesh" });
+        items.Add(new SelectListItem { Text = "West Bengal", Value = "WestBengal" });
+                }
+
+                <td>
+                    @Html.LabelFor(b => b.Customer_State)
+                </td>
+                <td>
+                    @Html.DropDownListFor(b => b.Customer_State, items, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(b => b.Customer_State, "", new { @style = "color: red" })
+                </td>
+            </tr>
+            <tr>
+                @{
+        List<SelectListItem> cities = new List<SelectListItem>();
+        cities.Add(new SelectListItem { Text = "Select City", Value = "", Selected = true });
+        cities.Add(new SelectListItem { Text = "Bhubaneswar", Value = "Bhubaneswar" });
+        cities.Add(new SelectListItem { Text = "Kolkata", Value = "Kolkata" });
+        cities.Add(new SelectListItem { Text = "Mumbai", Value = "Mumbai" });
+        cities.Add(new SelectListItem { Text = "Lucknow", Value = "Lucknow" });
+        cities.Add(new SelectListItem { Text = "Gwalior", Value = "Gwalior" });
+
+                }
+                <td>
+                    @Html.LabelFor(b => b.Customer_City)
+                </td>
+                <td>
+                    @Html.DropDownListFor(b => b.Customer_City, cities, new { @class = "form-control" })
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(b => b.Customer_City, "", new { @style = "color: red" })
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="SubmitCustomer" type="submit" value="Submit" />
+                    <input type="reset" value="Reset" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+
+    }
+</div>
+
+
+
+
+@{
+
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+
+@{
+    if (Convert.ToInt32(ViewData["Result"]) != 0)
+    {
+        if (Convert.ToInt32(ViewData["Result"]) == 1)
+        {
+            ViewData["Result"] = null;
+            <script type="text/javascript" language="javascript">
+                alert('Customer already exist with entered SSNID');
+            </script>
+        }
+        else
+        {
+            int i = Convert.ToInt32(ViewData["Result"]);
+            ViewData["Result"] = null;
+            <script type="text/javascript">
+                var message = '@message';
+                if (message)
+                    alert(message);
+            </script>
+        }
+    }
+}
+

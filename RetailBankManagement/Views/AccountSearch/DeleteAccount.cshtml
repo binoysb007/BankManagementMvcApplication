@@ -1,0 +1,124 @@
+﻿@model RetailBankManagement.Models.AccountSearch
+
+@{
+    ViewBag.Title = "DeleteAccount";
+}
+<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("LoginforExecutive", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddCustomer", "Customer")">Add customer</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerByCustomerId", "Customer")">Update/Delete customer</a> </td>
+        </tr>
+        <tr>
+            <td> <a href="@Url.Action("ViewAllCustomer", "Customer")">View all customer</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("InsertCustomer", "CreateCustomerAccounts2por")">Create account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountsearchforExecutive", "AccountSearch")">Delete account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewAllAccount", "AccountSearch")">View all account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+
+}
+<h2 class="header">Delete account</h2>
+<div class="form_div">
+@using (Html.BeginForm())
+{
+    <table class="tbl" cellspacing="5px" cellpadding="5px">
+        <tr>
+            <td>
+                @Html.HiddenFor(a => a.CustomerID)
+            </td>
+        </tr>
+
+
+        <tr>
+
+            <td>
+                @Html.LabelFor(a => a.AccountID)
+            </td>
+
+            <td>
+                @Html.DisplayFor(a => a.AccountID)
+            </td>
+        </tr>
+
+        <tr>
+
+            <td>
+                @Html.LabelFor(a => a.AccountType)
+            </td>
+
+            <td>
+                @Html.DisplayFor(a => a.AccountType)
+            </td>
+        </tr>
+
+        <tr>
+
+            <td>
+                @Html.LabelFor(a => a.DepositAmount)
+            </td>
+
+            <td>
+                @Html.DisplayFor(a => a.DepositAmount)
+            </td>
+            <td>
+                @Html.HiddenFor(a => a.DepositAmount)
+            </td>
+        </tr>
+
+
+        <tr>
+            <td></td>
+            <td>
+                <input id="Submit1" onclick="return confirm('Are you sure want to delete ?' );" type="submit" value="Delete" />
+                @Html.ActionLink("Cancel", "AccountByCustomerId")
+            </td>
+            <td></td>
+        </tr>
+
+
+    </table>
+}
+    </div>
+
+@{
+    if(Convert.ToInt32(ViewData["resultDelete"]) !=0)
+    {
+        if(Convert.ToInt32(ViewData["resultDelete"])==1)
+        { 
+        int i = Convert.ToInt32(ViewData["resultDelete"]);
+        ViewData["resultDelete"] = null;
+        <script type="text/javascript" language="javascript">
+            alert("Account successfully deleted");
+
+    </script>
+        }
+        else if (Convert.ToInt32(ViewData["resultDelete"]) == 2)
+        {
+            ViewData["resultDelete"] = null;
+            <script type="text/javascript" language="javascript">
+                alert("Account cannot be deleted without zero balance");
+            </script>
+        }
+    }
+    
+}
+
+
+

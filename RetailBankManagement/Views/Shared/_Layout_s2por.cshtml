@@ -1,0 +1,34 @@
+﻿<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+
+<body >
+    <div style="background-image:url(../../Images/bg.jpg); width:100%;height:100%; background-repeat:repeat;background-size:cover">
+        <table>
+            <tr>
+                <td colspan="2">
+                    <img src="~/Images/header image122.png" height="200px" width="100%" />
+                
+                </td>
+            </tr>
+            <tr>
+                <td class="sidemenu">@RenderSection("k")
+                </td>
+                <td style="width:600px;height:400px">@RenderBody()</td>
+            </tr>
+            <tr>
+                <td colspan="2" style="width:100%;background-color:#0D758C;height:50PX;position:absolute;">
+                <p style="text-align:center;color:white;">&copy; @DateTime.Now.Year - Alpha Bank</p>
+                </td>
+            </tr>
+        </table>
+
+
+    </div>
+</body>
+</html>

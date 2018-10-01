@@ -1,0 +1,89 @@
+﻿@model RetailBankManagement.Models.AccountSearch
+
+@{
+    ViewBag.Title = "AccountStatement";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("Loginforteller", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerforTeller", "Customer")">View customer details</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountByCustomerId", "AccountSearch")">View account details</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountByCustomerId", "AccountSearch")">Transactions</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountStatement", "AccountSearch")">Account statement</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+    }
+<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<h2 class="header">Account statement</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form_div">
+        <table class="tbl" cellspacing="5px" cellpadding="5px">
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.AccountID)
+                </td>
+                <td>
+                    @Html.TextBoxFor(a => a.AccountID)
+                </td>
+                <td>
+                    @Html.ValidationMessageFor(a => a.AccountID)
+                </td>
+            </tr>
+            <tr>
+                @{
+    List<SelectListItem> list = new List<SelectListItem>();
+    list.Add(new SelectListItem { Text = "--Select--", Value = "", Selected = true });
+    list.Add(new SelectListItem { Text = "1", Value = "1" });
+    list.Add(new SelectListItem { Text = "2", Value = "2" });
+    list.Add(new SelectListItem { Text = "3", Value = "3" });
+    list.Add(new SelectListItem { Text = "4", Value = "4" });
+    list.Add(new SelectListItem { Text = "5", Value = "5" });
+    list.Add(new SelectListItem { Text = "6", Value = "6" });
+    list.Add(new SelectListItem { Text = "7", Value = "7" });
+    list.Add(new SelectListItem { Text = "8", Value = "8" });
+    list.Add(new SelectListItem { Text = "9", Value = "9" });
+    list.Add(new SelectListItem { Text = "10", Value = "10" });
+                }
+                <td>
+                    @Html.LabelFor(a => a.transaction_no)
+                </td>
+                <td>
+                    @Html.DropDownListFor(a => a.transaction_no, list, new { @class = "from-control" })
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input id="SearchAccount" type="submit" value="Search" />
+                </td>
+            </tr>
+        </table>
+    </div>
+}
+@{
+
+    var message = TempData["AlertMessage"] ?? string.Empty;
+}
+<script type="text/javascript">
+    var message = '@message';
+    if (message)
+        alert(message);
+</script>
+

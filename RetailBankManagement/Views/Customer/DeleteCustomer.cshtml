@@ -1,0 +1,124 @@
+﻿@model RetailBankManagement.Models.Customer
+
+@{
+    ViewBag.Title = "DeleteCustomer";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("LoginforExecutive", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddCustomer", "Customer")">Add customer</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerByCustomerId", "Customer")">Update/Delete customer</a> </td>
+        </tr>
+        <tr>
+            <td> <a href="@Url.Action("ViewAllCustomer", "Customer")">View all customer</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("InsertCustomer", "CreateCustomerAccounts2por")">Create account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountsearchforExecutive", "AccountSearch")">Delete account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewAllAccount", "AccountSearch")">View all account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+
+}
+
+<h2 class="header">Delete Customer</h2>
+<link href="~/Content/Global_s2por.css" rel="stylesheet" />
+<div class="form_div">
+    @using (Html.BeginForm())
+    {
+        <table class="tbl" cellspacing="5px" cellpadding="5px">
+            <tr>
+                <td>
+                    @Html.HiddenFor(a => a.Customer_Id)
+                </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Customer_ssn_Id)
+                </td>
+                <td>
+
+                    @Html.DisplayFor(a => a.Customer_ssn_Id)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Customer_Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(a => a.Customer_Id)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Customer_Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(a => a.Customer_Name)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Customer_Age)
+                </td>
+                <td>
+                    @Html.DisplayFor(a => a.Customer_Age)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.LabelFor(a => a.Customer_Address)
+                </td>
+                <td>
+                    @Html.DisplayFor(a => a.Customer_Address)
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input id="Submit1" onclick="return confirm('Are you sure you want delete ?');" type="submit"
+                           value="Delete" />
+                    @Html.ActionLink("Cancel", "ViewCustomerByCustomerId")
+                </td>
+            </tr>
+        </table>
+    }
+</div>
+
+@{
+    if (Convert.ToInt32(ViewData["resultDelete"]) != 0)
+    {
+        if(Convert.ToInt32(ViewData["resultDelete"])==1)
+        { 
+        int i = Convert.ToInt32(ViewData["resultDelete"]);
+        ViewData["resultDelete"] = null;
+        <script type="text/javascript" language="javascript">
+            alert('Customer successfully deleted');
+        </script>
+        }
+        else if (Convert.ToInt32(ViewData["resultDelete"]) == 2)
+        {
+            int i = Convert.ToInt32(ViewData["resultDelete"]);
+            ViewData["resultDelete"] = null;
+            <script type="text/javascript" language="javascript">
+                alert('Requested customer has an active account,so can not be deleted');
+            </script>
+        }
+    }
+
+}
+

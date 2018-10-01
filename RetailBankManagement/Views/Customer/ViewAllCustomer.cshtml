@@ -1,0 +1,82 @@
+﻿@model IEnumerable<RetailBankManagement.Models.Customer>
+
+@{
+    ViewBag.Title = "ViewAllCustomer";
+}
+@section k
+{
+    <table class="menu" cellpadding="5px" cellspacing="5px">
+        <tr>
+            <td><a href="@Url.Action("LoginforExecutive", "WebsiteLogin")">Home</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AddCustomer", "Customer")">Add customer</a> </td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewCustomerByCustomerId", "Customer")">Update/Delete customer</a> </td>
+        </tr>
+        <tr>
+            <td> <a href="@Url.Action("ViewAllCustomer", "Customer")">View all customer</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("InsertCustomer", "CreateCustomerAccounts2por")">Create account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("AccountsearchforExecutive", "AccountSearch")">Delete account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("ViewAllAccount", "AccountSearch")">View all account</a></td>
+        </tr>
+        <tr>
+            <td><a href="@Url.Action("WebsiteLogin", "WebsiteLogin")">Logout</a></td>
+        </tr>
+    </table>
+
+}
+<style type="text/css">
+    .table {
+        border-collapse: collapse;
+        width: 900px;
+        margin: 0px auto;
+    }
+
+    .header1 {
+        background-color: gray;
+        font-weight: bold;
+        color: #fff;
+    }
+
+    .table th, .table td {
+        border: 1px solid black;
+        padding: 5px;
+        text-align: center;
+    }
+</style>
+<h2 class="header">All customer details</h2>
+<div class="form_div">
+
+    @{
+        var grid = new WebGrid(source: Model);
+        @grid.GetHtml(
+            tableStyle: "table",
+            headerStyle: "header1",
+            footerStyle: "grid-footer",
+            htmlAttributes: new { id = "DataTable" }, columns: grid.Columns(
+                        grid.Column("Customer_Id", "Customer ID"),
+                        grid.Column("Customer_ssn_Id", "Customer SSN ID"),
+                        grid.Column("customer_status", "Status"),
+                        grid.Column("customer_message", "Message"),
+                        grid.Column("update_date", "Last updated"),
+                         grid.Column("Operation",format:@<text> @Html.ActionLink("View detail", "viewCustbyID", new { data = item.Customer_Id, mode = "ByCustomerID" })</text>)
+
+
+        ));
+        
+          @Html.ActionLink("Download Excel Sheet", "DownloadExcel");
+        @*@Html.ActionLink("Download Doc Sheet", "DownloadWordCustomerDetails");*@
+}
+    
+</div>
+
+
+                

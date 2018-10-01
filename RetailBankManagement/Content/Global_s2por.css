@@ -1,0 +1,52 @@
+﻿.tbl
+{
+border:2px solid black;
+text-align:left;
+margin: 0px auto;
+}
+.form_div
+{
+text-align:center;
+position:center;
+}
+.header
+{
+    text-align:center;    
+}
+
+.sidemenu
+{
+width:100px;
+background-color:#108FAB;
+/*height:100px;*/
+opacity:0.7;
+}
+
+.menu
+{
+margin-bottom:200px;
+margin-left:10px;
+background-size:100px;
+margin:0 auto;
+
+height:100px;
+}
+
+.menu tr td 
+{
+background-color:rgba(1, 74, 117, 0.99);
+
+    }
+.menu tr td:hover
+{
+    background-color:black;
+
+}
+
+    .menu tr td a
+     {
+    color:white;
+    font-size:20px;
+    }
+   
+    
